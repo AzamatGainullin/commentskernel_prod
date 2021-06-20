@@ -10,6 +10,7 @@ from pathlib import Path
 from keras.models import load_model
 import pickle
 import pandas as pd
+import pretty_html_table
 
 file_name = Path(pathlib.Path.cwd(), 'parsing_folder', 'mfd_sber_downloaded.csv')
 smartlab_file_name = Path(pathlib.Path.cwd(), 'parsing_folder', 'smartlab_sber_downloaded.csv')
@@ -39,7 +40,7 @@ def daily_download_call():
         get_comments_kernel()
     
     
-    threading.Timer(600, daily_download_call ).start()
+    threading.Timer(6000, daily_download_call ).start()
 daily_download_call()
 
 
@@ -48,7 +49,8 @@ daily_download_call()
 
 
 frontend_example = pd.read_pickle('kernel_file.pkl')
-
+frontend_example['дата'] = frontend_example.index.strftime('%d.%m.%Y')
+frontend_example = pretty_html_table.build_table(frontend_example, 'blue_light', text_align='center', font_size='18px')
 
 
 
@@ -58,12 +60,13 @@ frontend_example = pd.read_pickle('kernel_file.pkl')
 import pandas as pd
 import os
 from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return frontend_example.to_html()
+    return render_template('template.html', data=frontend_example)
 
 if __name__ == '__main__':    
     app.run()

@@ -48,12 +48,13 @@ def get_comments_kernel():
     df = get_df(path_='mfd')
     x_test = get_x_test(df)
     y_pred = get_y_pred(x_test, loaded_model)
-    df['m_comments_kernel'] = y_pred
+    df['Ожидания по Сберу'] = y_pred
     df1 = get_df(path_='smartlab')
     x_test1 = get_x_test(df1)
     y_pred1 = get_y_pred(x_test1, loaded_model)
-    df1['s_comments_kernel_'] = y_pred1
+    #df1['Ожидания по доллару США_'] = y_pred1
+    df1['Ожидания по доллару США_'] = 'Алгоритмы в настройке...'
     
-    df['s_comments_kernel'] = df1['s_comments_kernel_']
-    df_to_show = df[['m_comments_kernel', 's_comments_kernel']]
+    df['Ожидания по доллару США'] = df1['Ожидания по доллару США_']
+    df_to_show = df[['Ожидания по Сберу', 'Ожидания по доллару США']]
     df_to_show.to_pickle('kernel_file.pkl')
