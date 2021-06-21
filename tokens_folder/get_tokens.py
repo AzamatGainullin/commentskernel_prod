@@ -50,38 +50,38 @@ def df_with_tokens_and_date(df_from_csv):
 
     return df_with_tokens
 
-def df_from_csv_and_dropna(path_for_token_mfd , names):
-    df = pd.read_csv(path_for_token_mfd, names=names)
+def df_from_csv_and_dropna(path_for_token_eco , names):
+    df = pd.read_csv(path_for_token_eco, names=names)
     df.dropna(inplace=True)
     return df
 
 def rename_date(date):
     return str(date)[-4:] + '-' + str(date)[-7:-5] + '-' + str(date)[-10:-8]
 
-def get_mfd_with_tokens(path_for_token_mfd):
-    df_from_csv = df_from_csv_and_dropna(path_for_token_mfd,names)
+def get_eco_with_tokens(path_for_token_eco):
+    df_from_csv = df_from_csv_and_dropna(path_for_token_eco,names)
     df_from_csv.reset_index(drop=True, inplace=True)
     df_from_csv['text_date'] = df_from_csv['text_date'].apply(rename_date)
     df_with_tokens = df_with_tokens_and_date(df_from_csv)
-    df_with_tokens.to_pickle(Path(pathlib.Path.cwd(), 'tokens_folder', 'mfd_saved_tokens_pkl.pkl'))
-    df_with_tokens.to_csv(Path(pathlib.Path.cwd(), 'tokens_folder', 'mfd_saved_tokens.csv'))
+    df_with_tokens.to_pickle(Path(pathlib.Path.cwd(), 'tokens_folder', 'eco_saved_tokens_pkl.pkl'))
+    df_with_tokens.to_csv(Path(pathlib.Path.cwd(), 'tokens_folder', 'eco_saved_tokens.csv'))
 
 
 
     
 
     
-### КОД ДЛЯ СМАРТЛАБА ###
+### КОД ДЛЯ collab ###
     
-def df_from_csv_and_dropna_smartlab(path, names):
-    df_smartlab = pd.read_csv(path, names=names)
-    df_smartlab.dropna(inplace=True)
-    return df_smartlab
+def df_from_csv_and_dropna_collab(path, names):
+    df_collab = pd.read_csv(path, names=names)
+    df_collab.dropna(inplace=True)
+    return df_collab
 
-def get_smartlab_with_tokens(smartlab_file_name):
-    df_from_csv_smart = df_from_csv_and_dropna_smartlab(smartlab_file_name,names)
-    df_from_csv_smart.reset_index(drop=True, inplace=True)
+def get_collab_with_tokens(collab_file_name):
+    df_from_csv_col = df_from_csv_and_dropna_collab(collab_file_name,names)
+    df_from_csv_col.reset_index(drop=True, inplace=True)
     
-    df_with_tokens_smart = df_with_tokens_and_date(df_from_csv_smart)
-    df_with_tokens_smart.to_pickle(Path(pathlib.Path.cwd(), 'tokens_folder', 'smartlab_saved_tokens_pkl.pkl'))
-    df_with_tokens_smart.to_csv(Path(pathlib.Path.cwd(), 'tokens_folder', 'smartlab_saved_tokens.csv'))    
+    df_with_tokens_col = df_with_tokens_and_date(df_from_csv_col)
+    df_with_tokens_col.to_pickle(Path(pathlib.Path.cwd(), 'tokens_folder', 'collab_saved_tokens_pkl.pkl'))
+    df_with_tokens_col.to_csv(Path(pathlib.Path.cwd(), 'tokens_folder', 'collab_saved_tokens.csv'))    
