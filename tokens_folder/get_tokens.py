@@ -2,7 +2,8 @@ import pandas as pd
 import pathlib
 from pathlib import Path
 
-#path_for_token_mfd = Path(pathlib.Path.cwd().parent, 'parsing_folder', 'mfd_sber_downloaded.csv')
+#path_for_token_mfd = Path(pathlib.Path.cwd().parent, 'tokens_folder', 'smartlab_saved_tokens_pkl.pkl')
+#path_for_token_mfd = Path(pathlib.Path.cwd().parent, 'tokens_folder', 'smartlab_saved_tokens.csv')
 names=['author', 'text_initial', 'text_date', 'url']
 
 from natasha import (Segmenter, NewsEmbedding, NewsMorphTagger, NewsSyntaxParser, Doc, MorphVocab)    
@@ -64,8 +65,8 @@ def get_mfd_with_tokens(path_for_token_mfd):
     df_from_csv.reset_index(drop=True, inplace=True)
     df_from_csv['text_date'] = df_from_csv['text_date'].apply(rename_date)
     df_with_tokens = df_with_tokens_and_date(df_from_csv)
-    df_with_tokens.to_pickle('mfd_saved_tokens_pkl.pkl')
-    df_with_tokens.to_csv('mfd_saved_tokens.csv')
+    df_with_tokens.to_pickle(Path(pathlib.Path.cwd(), 'tokens_folder', 'mfd_saved_tokens_pkl.pkl'))
+    df_with_tokens.to_csv(Path(pathlib.Path.cwd(), 'tokens_folder', 'mfd_saved_tokens.csv'))
 
 
 
@@ -84,7 +85,7 @@ def get_smartlab_with_tokens(smartlab_file_name):
     df_from_csv_smart.reset_index(drop=True, inplace=True)
     #df_from_csv_smart['text_date'] = df_from_csv_smart['text_date'].apply(rename_date)
     df_with_tokens_smart = df_with_tokens_and_date(df_from_csv_smart)
-    df_with_tokens_smart.to_pickle('smartlab_saved_tokens_pkl.pkl')
-    df_with_tokens_smart.to_csv('smartlab_saved_tokens.csv')    
+    df_with_tokens_smart.to_pickle(Path(pathlib.Path.cwd(), 'tokens_folder', 'smartlab_saved_tokens_pkl.pkl'))
+    df_with_tokens_smart.to_csv(Path(pathlib.Path.cwd(), 'tokens_folder', 'smartlab_saved_tokens.csv'))    
 
 #df_today = df_with_tokens[df_with_tokens.index==df_with_tokens.index[-1]]

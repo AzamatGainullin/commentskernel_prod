@@ -40,7 +40,7 @@ def daily_download_call():
         get_comments_kernel()
     
     
-    threading.Timer(6000, daily_download_call ).start()
+    threading.Timer(10000, daily_download_call ).start()
 daily_download_call()
 
 

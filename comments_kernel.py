@@ -11,9 +11,9 @@ def to_str(spisok):
 
 def get_df(path_='mfd'):
     if path_=='mfd':
-        mfd_saved_tokens_pkl = Path(pathlib.Path.cwd(), 'mfd_saved_tokens_pkl.pkl')
+        mfd_saved_tokens_pkl = Path(pathlib.Path.cwd(), 'tokens_folder', 'mfd_saved_tokens_pkl.pkl')
     if path_=='smartlab':
-        mfd_saved_tokens_pkl = Path(pathlib.Path.cwd(), 'smartlab_saved_tokens_pkl.pkl')
+        mfd_saved_tokens_pkl = Path(pathlib.Path.cwd(), 'tokens_folder', 'smartlab_saved_tokens_pkl.pkl')
     df = pd.read_pickle(mfd_saved_tokens_pkl)
     df.text = df['text'].apply(to_str)
     return df
@@ -53,8 +53,8 @@ def get_comments_kernel():
     x_test1 = get_x_test(df1)
     y_pred1 = get_y_pred(x_test1, loaded_model)
     #df1['Ожидания по доллару США_'] = y_pred1
-    df1['Ожидания по доллару США_'] = 'Алгоритмы в настройке...'
+    df1['Ожидания по доллару_'] = 'скоро...'
     
-    df['Ожидания по доллару США'] = df1['Ожидания по доллару США_']
-    df_to_show = df[['Ожидания по Сберу', 'Ожидания по доллару США']]
+    df['Ожидания по доллару'] = 'скоро...'
+    df_to_show = df[['Ожидания по Сберу', 'Ожидания по доллару']]
     df_to_show.to_pickle('kernel_file.pkl')
