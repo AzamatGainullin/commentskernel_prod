@@ -29,7 +29,7 @@ def daily_download_call():
     global start_time
     delta = datetime.datetime.now()-start_time
     
-    if delta.days >=0:
+    if delta.days >=1:
         
         start_time = datetime.datetime.now()
         make_daily_download(file_name, collab_file_name)
@@ -38,7 +38,7 @@ def daily_download_call():
         get_comments_kernel()
     
     
-    threading.Timer(86400, daily_download_call ).start()
+    threading.Timer(10000, daily_download_call ).start()
 daily_download_call()
 
 app = Flask(__name__)
