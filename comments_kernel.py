@@ -5,7 +5,6 @@ import pickle
 import pathlib
 from pathlib import Path
 
-
 def to_str(spisok):
     return ', '.join(spisok)
 

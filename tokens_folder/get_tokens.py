@@ -2,8 +2,6 @@ import pandas as pd
 import pathlib
 from pathlib import Path
 
-#path_for_token_mfd = Path(pathlib.Path.cwd().parent, 'tokens_folder', 'smartlab_saved_tokens_pkl.pkl')
-#path_for_token_mfd = Path(pathlib.Path.cwd().parent, 'tokens_folder', 'smartlab_saved_tokens.csv')
 names=['author', 'text_initial', 'text_date', 'url']
 
 from natasha import (Segmenter, NewsEmbedding, NewsMorphTagger, NewsSyntaxParser, Doc, MorphVocab)    
@@ -83,9 +81,7 @@ def df_from_csv_and_dropna_smartlab(path, names):
 def get_smartlab_with_tokens(smartlab_file_name):
     df_from_csv_smart = df_from_csv_and_dropna_smartlab(smartlab_file_name,names)
     df_from_csv_smart.reset_index(drop=True, inplace=True)
-    #df_from_csv_smart['text_date'] = df_from_csv_smart['text_date'].apply(rename_date)
+    
     df_with_tokens_smart = df_with_tokens_and_date(df_from_csv_smart)
     df_with_tokens_smart.to_pickle(Path(pathlib.Path.cwd(), 'tokens_folder', 'smartlab_saved_tokens_pkl.pkl'))
     df_with_tokens_smart.to_csv(Path(pathlib.Path.cwd(), 'tokens_folder', 'smartlab_saved_tokens.csv'))    
-
-#df_today = df_with_tokens[df_with_tokens.index==df_with_tokens.index[-1]]

@@ -5,7 +5,6 @@ import csv
 from time import sleep
 import random
 import datetime, threading, time
-#downloaded_page_number = '82487'
 
 ### SMARTLAB FUNCTIONS ###
 
@@ -40,14 +39,12 @@ def smartlab_get_last_page_number():
         smartlab_html = smartlab_get_html(smartlab_last_page)
         smartlab_soup = BeautifulSoup(smartlab_html, 'lxml')
         smartlab_last_page_number = smartlab_soup.find('div', class_='pagination1').find_all('a')[-1]['href'][-5:-1]
-        print({'smartlab_last_page_number': smartlab_last_page_number})
+        #print({'smartlab_last_page_number': smartlab_last_page_number})
         #smartlab_last_page_number = smartlab_soup.find('a', class_="page gradient last")['href'][-5:-1]
     except:
         print('SMARTLAB - CANT GET LAST PAGE NUMBER, SOME ERROR')
         raise TypeError
     return smartlab_last_page_number
-
-#smartlab_file_name = 'smartlab_sber_downloaded.csv'
 
 smartlab_url = 'https://smart-lab.ru/forum/SBER/page{}/'
 
@@ -55,7 +52,6 @@ smartlab_url = 'https://smart-lab.ru/forum/SBER/page{}/'
 
 ### MFD FUNCTIONS ###
 
-#file_name = 'mfd_sber_downloaded.csv'
 user_agent = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
 url = 'http://forum.mfd.ru/forum/thread/?id=62075&page={}'
 
@@ -120,7 +116,7 @@ def make_daily_download(file_name, smartlab_file_name):
             for i in range(int(downloaded_page_number)+1, int(last_page_number)-1): # ЗДЕСЬ ПОМЕНЯЛ
                 get_page_data(url.format(str(i)), writer)
                 sleep(random.randrange(1,3))
-        print('MFD_TEST: work done, FILE CLOSED')
+        #print('MFD_TEST: work done, FILE CLOSED')
 
     smartlab_last_page_number = smartlab_get_last_page_number()
     with open(smartlab_file_name, "r") as file:
@@ -135,4 +131,4 @@ def make_daily_download(file_name, smartlab_file_name):
             for i in range(int(smartlab_downloaded_page_number)+1, int(smartlab_last_page_number)-1): # ЗДЕСЬ ПОМЕНЯЛ
                 smartlab_get_page_data(smartlab_url.format(str(i)), smartlab_writer)
                 sleep(random.randrange(1,3))
-        print('SMARTLAB_TEST: work done, FILE CLOSED')
+        #print('SMARTLAB_TEST: work done, FILE CLOSED')
