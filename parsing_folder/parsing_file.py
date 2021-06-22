@@ -40,7 +40,7 @@ def collab_get_page_data(url, collab_writer):
         data = {'name': name,
                     'text': text,
                     'date': date,
-                    'url': url}
+                    'url': url[-10:]}
         collab_writer.writerow(data)
 
 def collab_get_last_page_number():
@@ -100,7 +100,7 @@ def get_page_data(url, writer):
                 data = {'name': name,
                             'text': text,
                             'date': date,
-                            'url': url}
+                            'url': url[-10:]}
                 writer.writerow(data)
             except:
                 #print(comment.text)
